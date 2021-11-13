@@ -27,17 +27,22 @@ def create_gui(messages, command_handlers, process_message, model):
 
     teams_frame = tkinter.Frame(content_frame)
     teams_frame.columnconfigure(tuple(range(0, columns)), weight=1)
-
-    index = 0
-    for name, members in model.items():
-        team_view = team.create_team_view(teams_frame, name, members)
-        team_view.grid(row=int(index / columns), column=index % columns, sticky='NSEW')
-        index = index + 1
-
     teams_frame.pack()
 
-    add_controls = create_add_student(content_frame, list(model.keys()))
+    def refresh_charts():
+        for child in teams_frame.winfo_children():
+            child.destroy()
+
+        index = 0
+        for name, members in model.items():
+            team_view = team.create_team_view(teams_frame, name, members)
+            team_view.grid(row=int(index / columns), column=index % columns, sticky='NSEW')
+            index = index + 1
+
+    add_controls = create_add_student(content_frame, messages, list(model.keys()))
     add_controls.pack()
+
+    refresh_charts()
 
     def process_messages():
         if len(messages) > 0:
@@ -50,5 +55,6 @@ def create_gui(messages, command_handlers, process_message, model):
         root.mainloop()
 
     return {
-        'start': start
+        'start': start,
+        'refresh_charts': refresh_charts
     }

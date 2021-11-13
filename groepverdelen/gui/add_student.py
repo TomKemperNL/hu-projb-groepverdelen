@@ -1,8 +1,24 @@
 import tkinter
 import groups
+from messages import ADD_STUDENT
 
 
-def create_add_student(parent, team_names):
+def create_slide(parent, i, program_name):
+    scale_label = tkinter.Label(parent, text=f'{program_name}')
+    value = tkinter.IntVar(parent)
+    value_label = tkinter.Label(parent, text='0')
+
+    scale = tkinter.Scale(parent,
+                          from_=1, to=len(groups.VALUES), variable=value,
+                          command=lambda x: value_label.configure(text=f'{groups.VALUES[int(x) - 1]}'),
+                          orient=tkinter.HORIZONTAL, showvalue=False)
+    scale_label.grid(column=0, row=i)
+    scale.grid(column=1, row=i)
+    value_label.grid(column=2, row=i)
+    return value
+
+
+def create_add_student(parent, messages, team_names):
     controls_frame = tkinter.Frame(parent)
 
     input_frame = tkinter.Frame(controls_frame)
@@ -19,11 +35,21 @@ def create_add_student(parent, team_names):
         c.pack(side=tkinter.LEFT)
 
     slider_frame = tkinter.Frame(parent)
-    for program in range(0, len(groups.PROGRAM_NAMES)):
-        scale = tkinter.Scale(slider_frame, from_=1, to=len(groups.VALUES), orient=tkinter.HORIZONTAL, showvalue=False)
-        scale.pack()
+    choices = {}
+    for i in range(0, len(groups.PROGRAM_NAMES)):
+        program_name = groups.PROGRAM_NAMES[i]
+        choices[program_name] = create_slide(slider_frame, i, program_name)
 
     controls_frame.pack()
     slider_frame.pack()
+
+    def add_student():
+        name = name_field.get()
+        team = selected.get()
+        tupled_choice = [(program, groups.VALUES[value.get() - 1]) for program, value in choices.items()]
+        messages.append((ADD_STUDENT, (team, name, tupled_choice)))
+
+    submit_button = tkinter.Button(parent, text='Ok', command=add_student)
+    submit_button.pack()
 
     return controls_frame
