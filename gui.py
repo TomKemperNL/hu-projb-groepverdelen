@@ -1,4 +1,5 @@
 import tkinter
+import chart
 
 
 # If you're thinking 'what weird Python is this??', it's demo-code and I'm not allowed to use classes yet:)
@@ -11,6 +12,9 @@ def create_gui(messages, command_handlers, process_message):
 
     increment_button = tkinter.Button(root, text='+', command=command_handlers['increment'])
     increment_button.pack()
+
+    chart_team1 = chart.create_chart(root, [('Fred', 30), ('George', 40), ('Harry', 20)])
+    chart_team1.pack()
 
     def process_messages():
         if len(messages) > 0:
