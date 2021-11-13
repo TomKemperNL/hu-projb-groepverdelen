@@ -1,4 +1,5 @@
 import tkinter
+import tkinter.messagebox
 import groups
 from messages import ADD_STUDENT
 
@@ -47,7 +48,11 @@ def create_add_student(parent, messages, team_names):
         name = name_field.get()
         team = selected.get()
         tupled_choice = [(program, groups.VALUES[value.get() - 1]) for program, value in choices.items()]
-        messages.append((ADD_STUDENT, (team, name, tupled_choice)))
+
+        if groups.is_valid_groupchoice(tupled_choice):
+            messages.append((ADD_STUDENT, (team, name, tupled_choice)))
+        else:
+            tkinter.messagebox.showerror('Ongeldige keuze', 'Geen geldige richting keuzen (totaal 100)')
 
     submit_button = tkinter.Button(parent, text='Ok', command=add_student)
     submit_button.pack()

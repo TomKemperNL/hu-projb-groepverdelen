@@ -31,7 +31,8 @@ def create_team_view(parent, messages, team_name, members):
         too_many = tkinter.Label(members_frame, text=f'{len(members)} leden, max 5', fg='red')
         too_many.pack()
 
-    missing_programs = set(groups.PROGRAM_NAMES).difference(distribution.keys())
+    programs_in_distribution = [key for key, value in distribution.items() if value > 0]
+    missing_programs = set(groups.PROGRAM_NAMES).difference(programs_in_distribution)
     for program in missing_programs:
         missing_label = tkinter.Label(members_frame, text=f'Geen {program} in team', fg='red')
         missing_label.pack()
