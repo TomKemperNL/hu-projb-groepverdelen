@@ -2,7 +2,7 @@ import threading
 
 import groups
 from groups import *
-from messages import ADD_STUDENT
+from messages import *
 from gui import create_gui
 from web import create_web
 
@@ -18,6 +18,9 @@ dummy_data(model)
 def process_message(message, arguments):
     if message == ADD_STUDENT:
         groups.add_student_choice(model, *arguments)
+        gui['refresh_charts']()
+    elif message == REMOVE_STUDENT:
+        groups.remove_student_choice(model, arguments)
         gui['refresh_charts']()
 
 

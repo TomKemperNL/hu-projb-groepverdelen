@@ -1,9 +1,16 @@
 import tkinter
 from gui.chart import create_chart
 import groups
+from messages import REMOVE_STUDENT
 
 
-def create_team_view(parent, team_name, members):
+def create_student_name(parent, messages, name):
+    member_label = tkinter.Label(parent, text=f'- {name}', cursor='pirate')
+    member_label.pack()
+    member_label.bind('<Button-1>', lambda e: messages.append((REMOVE_STUDENT, name)))
+
+
+def create_team_view(parent, messages, team_name, members):
     frame = tkinter.Frame(parent)
     titel = tkinter.Label(frame, text=f'{team_name}')
     titel.grid(columnspan=2)
@@ -14,8 +21,7 @@ def create_team_view(parent, team_name, members):
 
     members_frame = tkinter.Frame(frame)
     for student in members:
-        member_label = tkinter.Label(members_frame, text=f'- {student["name"]}')
-        member_label.pack()
+        create_student_name(members_frame, messages, student['name'])
 
     if len(members) < 4:
         too_few = tkinter.Label(members_frame, text=f'{len(members)} leden, minstens 4', fg='red')
@@ -29,7 +35,7 @@ def create_team_view(parent, team_name, members):
     for program in missing_programs:
         missing_label = tkinter.Label(members_frame, text=f'Geen {program} in team', fg='red')
         missing_label.pack()
-        
+
     members_frame.grid(row=1, column=1)
 
     return frame

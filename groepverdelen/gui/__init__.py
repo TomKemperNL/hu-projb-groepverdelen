@@ -35,7 +35,7 @@ def create_gui(messages, command_handlers, process_message, model):
 
         index = 0
         for name, members in model.items():
-            team_view = team.create_team_view(teams_frame, name, members)
+            team_view = team.create_team_view(teams_frame, messages, name, members)
             team_view.grid(row=int(index / columns), column=index % columns, sticky='NSEW')
             index = index + 1
 

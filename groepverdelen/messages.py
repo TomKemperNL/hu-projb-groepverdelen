@@ -1,5 +1,2 @@
-INCREMENT = "INCREMENT"
 ADD_STUDENT = "ADD_STUDENT"
-
-def increment():
-    return ("INCREMENT", tuple())
+REMOVE_STUDENT = "REMOVE_STUDENT"
