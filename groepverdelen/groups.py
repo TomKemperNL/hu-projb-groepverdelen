@@ -1,10 +1,10 @@
 VALUES = [0, 25, 33, 50, 75, 100]
 PROGRAMS = {
-    'sd': ('SD', 'Software Development', '#000000'),
-    'ai': ('AI', 'Artificial Intelligence', '#000000'),
-    'csc': ('CSC', 'Cybersecurity & Cloud', '#000000'),
-    'ti': ('TI', 'Technische Informatica', '#000000'),
-    'bim': ('BIM', 'Business IT Management', '#000000')}
+    'sd': ('SD', 'Software Development', '#FF0000'),
+    'ai': ('AI', 'Artificial Intelligence', '#0000FF'),
+    'csc': ('CSC', 'Cybersecurity & Cloud', '#00FF00'),
+    'ti': ('TI', 'Technische Informatica', '#FFFF00'),
+    'bim': ('BIM', 'Business IT Management', '#00FFFF')}
 
 PROGRAM_NAMES = [p[0] for p in PROGRAMS.values()]
 
@@ -71,3 +71,13 @@ def get_team_distribution(team):
         values[key] = factor * value
 
     return values
+
+
+def dummy_data(model):
+    add_student_choice(model, 'Team 1', 'A', [('SD', 100)])
+    add_student_choice(model, 'Team 1', 'B', [('TI', 50), ('CSC', 50)])
+    add_student_choice(model, 'Team 1', 'C', [('AI', 33), ('BIM', 33), ('CSC', 33)])
+    add_student_choice(model, 'Team 1', 'D', [('SD', 100)])
+
+    add_student_choice(model, 'Team 2', 'E', [('SD', 100)])
+    add_student_choice(model, 'Team 2', 'F', [('TI', 100)])

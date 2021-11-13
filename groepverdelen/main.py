@@ -1,4 +1,6 @@
 import threading
+
+from groups import *
 from messages import INCREMENT
 from gui import create_gui
 from web import create_web
@@ -6,24 +8,15 @@ from web import create_web
 messages = []
 handlers = {}
 
-counter = 0
-
-
-def increment():
-    global counter
-    counter = counter + 1
-    gui['set_label'](f'{counter}')
-
-
-handlers['increment'] = increment
+model = initial_groups()
+dummy_data(model)
 
 
 def process_message(message, arguments):
-    if message == INCREMENT:
-        increment()
+    pass
 
 
-gui = create_gui(messages, handlers, process_message)
+gui = create_gui(messages, handlers, process_message, model)
 web = create_web(messages, handlers)
 
 if __name__ == '__main__':
