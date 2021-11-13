@@ -1,6 +1,8 @@
+import json
 import threading
-
+import os.path
 import groups
+
 from groups import *
 from messages import *
 from gui import create_gui
@@ -10,7 +12,12 @@ messages = []
 handlers = {}
 
 model = initial_groups()
-dummy_data(model)
+
+if os.path.exists('data.json'):
+    with open('data.json', 'r') as file:
+        model = json.load(file)
+else:
+    dummy_data(model)
 
 
 # The tricky part here is that Bottle works in a different thread.

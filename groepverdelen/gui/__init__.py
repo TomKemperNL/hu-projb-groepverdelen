@@ -1,6 +1,7 @@
 import tkinter
 
 import groups
+import json
 import gui.chart
 import gui.team
 from gui.add_student import create_add_student
@@ -42,6 +43,12 @@ def create_gui(messages, command_handlers, process_message, model):
     add_controls = create_add_student(content_frame, messages, list(model.keys()))
     add_controls.pack()
 
+    def save():
+        with open('data.json', 'w') as file:
+            json.dump(model, file)
+
+    save_button = tkinter.Button(content_frame, text='Save', command=save)
+    save_button.pack()
     refresh_charts()
 
     def process_messages():
