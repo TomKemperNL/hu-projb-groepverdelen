@@ -8,7 +8,7 @@ import groups
 def create_web(messages, handlers):
     @get('/')
     def index():
-        return static_file('views/index.html', './')
+        return static_file('index.html', 'groepverdelen/views')
 
     @post('/join')
     def join_group():
@@ -33,5 +33,5 @@ def create_web(messages, handlers):
         return template("Doei {{name}}", name=name)
 
     return {
-        'start': lambda: run(host='localhost', port=8080)
+        'start': lambda: run(host='0.0.0.0', port=80)
     }
