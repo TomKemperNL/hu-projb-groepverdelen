@@ -19,7 +19,7 @@ def create_chart(parent, data):
         values.append(value)
         colors.append(COLORS[name])
 
-    fig = plt.figure(figsize=(3, 3))
+    fig = plt.figure(figsize=(2.5, 2.5))
 
     plt.pie(values, labels=labels, colors=colors, autopct='%1.0f%%', startangle=90)
     plt.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
