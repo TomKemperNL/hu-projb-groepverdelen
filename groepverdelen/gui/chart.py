@@ -6,7 +6,7 @@ from matplotlib.backends.backend_tkagg import (
 from matplotlib.figure import Figure
 
 COLORS = dict([(key, color) for key, _, color in PROGRAMS.values()])
-COLORS['NONE'] = '#ffffff'
+COLORS['NONE'] = '#eeeeee'
 
 
 def create_chart(parent, data):
@@ -19,9 +19,10 @@ def create_chart(parent, data):
         values.append(value)
         colors.append(COLORS[name])
 
-    fig, ax = plt.subplots()
-    ax.pie(values, labels=labels, colors=colors, autopct='%1.0f%%', shadow=True, startangle=90)
-    ax.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
+    fig = plt.figure(figsize=(3, 3))
+
+    plt.pie(values, labels=labels, colors=colors, autopct='%1.0f%%', startangle=90)
+    plt.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
     canvas = FigureCanvasTkAgg(fig, master=parent)  # A tk.DrawingArea.
     canvas.draw()
 

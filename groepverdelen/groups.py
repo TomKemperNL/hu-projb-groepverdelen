@@ -74,10 +74,10 @@ def get_team_distribution(team):
 
 
 def dummy_data(model):
-    add_student_choice(model, 'Team 1', 'A', [('SD', 100)])
-    add_student_choice(model, 'Team 1', 'B', [('TI', 50), ('CSC', 50)])
-    add_student_choice(model, 'Team 1', 'C', [('AI', 33), ('BIM', 33), ('CSC', 33)])
-    add_student_choice(model, 'Team 1', 'D', [('SD', 100)])
+    add_student_choice(model, 'Team 1', 'Arie de Groot', [('SD', 100)])
+    add_student_choice(model, 'Team 1', 'Bruno Verkade', [('TI', 50), ('CSC', 50)])
+    add_student_choice(model, 'Team 1', 'Chris Lemontagne', [('AI', 33), ('BIM', 33), ('CSC', 33)])
+    add_student_choice(model, 'Team 1', 'Drummond Lee', [('SD', 100)])
 
-    add_student_choice(model, 'Team 2', 'E', [('SD', 100)])
-    add_student_choice(model, 'Team 2', 'F', [('TI', 100)])
+    add_student_choice(model, 'Team 2', 'Effi De Geus', [('SD', 100)])
+    add_student_choice(model, 'Team 2', 'Faruk Lambard', [('TI', 100)])
