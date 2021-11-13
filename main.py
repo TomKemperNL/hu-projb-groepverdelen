@@ -1,44 +1,31 @@
-import tkinter
-from bottle import route, run, template
 import threading
 from messages import INCREMENT
+from gui import create_gui
+from web import create_web
 
-root = tkinter.Tk()
+messages = []
+handlers = {}
 
 counter = 0
-label = tkinter.Label(root, text=f'{counter}')
-label.pack()
 
 
 def increment():
     global counter
     counter = counter + 1
-    label.configure(text=f'{counter}')
+    gui['set_label'](f'{counter}')
 
 
-@route('/hello/<name>')
-def index(name):
-    print('ooowkee1')
-    messages.append(('INCREMENT',))
-    print('ooowkee2')
-    return template('<b>Hello {{name}}</b>!', name=name)
+handlers['increment'] = increment
 
 
-increment_button = tkinter.Button(root, text='+', command=increment)
-increment_button.pack()
+def process_message(message, arguments):
+    if message == INCREMENT:
+        increment()
 
-messages = []
 
-
-def process_messages():
-    if len(messages) > 0:
-        message, arguments = messages.pop()
-        if message == INCREMENT:
-            increment()
-    root.after(100, process_messages)
-
+gui = create_gui(messages, handlers, process_message)
+web = create_web(messages, handlers)
 
 if __name__ == '__main__':
-    threading.Thread(target=lambda: run(host='localhost', port=8080)).start()
-    root.after(100, process_messages)
-    root.mainloop()
+    threading.Thread(target=web['start']).start()
+    gui['start']()
