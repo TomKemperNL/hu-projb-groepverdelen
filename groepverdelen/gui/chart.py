@@ -15,9 +15,10 @@ def create_chart(parent, data):
     colors = []
 
     for name, value in data.items():
-        labels.append(name)
-        values.append(value)
-        colors.append(COLORS[name])
+        if value > 0:
+            labels.append(name)
+            values.append(value)
+            colors.append(COLORS[name])
 
     fig = plt.figure(figsize=(2.5, 2.5))
 
