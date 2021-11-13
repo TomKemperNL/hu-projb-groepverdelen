@@ -25,5 +25,6 @@ def create_chart(parent, data):
     plt.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
     canvas = FigureCanvasTkAgg(fig, master=parent)  # A tk.DrawingArea.
     canvas.draw()
-
+    plt.close(fig)  # currently we're refreshing by recreating everything
+    # thats probably not very clever... so the alternative is -not- closing and updating here
     return canvas.get_tk_widget()
