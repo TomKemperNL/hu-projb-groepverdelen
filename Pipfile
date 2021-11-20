@@ -7,6 +7,7 @@ name = "pypi"
 flask = "*"
 matplotlib = "*"
 requests = "*"
+gevent = "*"
 
 [dev-packages]
 pytest = "*"

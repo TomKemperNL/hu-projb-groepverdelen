@@ -1,12 +1,12 @@
-from flask import Flask, render_template, request,render_template_string
+from flask import Flask, render_template, request, render_template_string
 from messages import ADD_STUDENT, REMOVE_STUDENT
+from gevent.pywsgi import WSGIServer
 
 # If you're thinking 'what weird Python is this??', it's demo-code and I'm not allowed to use classes yet:)
 import groups
 
 
 def create_web(messages, handlers):
-
     app = Flask(__name__, template_folder='views')
 
     @app.get('/')
@@ -35,6 +35,10 @@ def create_web(messages, handlers):
         messages.append((REMOVE_STUDENT, name))
         return render_template_string("Doei {{name}}", name=name)
 
+    def start_in_gevent():
+        http_server = WSGIServer(('0.0.0.0', 80), app)
+        http_server.serve_forever()
+
     return {
-        'start': lambda: app.run(host='0.0.0.0', port=80)
+        'start': start_in_gevent
     }
