@@ -20,7 +20,7 @@ else:
     dummy_data(model)
 
 
-# The tricky part here is that Bottle works in a different thread.
+# The tricky part here is that Flask works in a different thread.
 # And TKinter does not like it when you change the UI from a different thread...
 def process_message(message, arguments):
     if message == ADD_STUDENT:

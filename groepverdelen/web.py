@@ -25,7 +25,7 @@ def create_web(messages, handlers):
 
         if groups.is_valid_groupchoice(choices):
             messages.append((ADD_STUDENT, (team, name, choices)))
-            return render_template_string("Ok {{name}}", name=name)
+            return render_template('thanks.html', name=name)
         else:
             return render_template_string("Invalid choices", name=name, status=400)
 

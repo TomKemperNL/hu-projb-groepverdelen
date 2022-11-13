@@ -1,4 +1,4 @@
-VALUES = [0, 25, 33, 50, 75, 100]
+VALUES = [0, 25, 33, 50, 66, 75, 100]
 PROGRAMS = {
     'sd': ('SD', 'Software Development', '#FF0000'),
     'ai': ('AI', 'Artificial Intelligence', '#0000FF'),
