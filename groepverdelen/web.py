@@ -6,7 +6,7 @@ from gevent.pywsgi import WSGIServer
 import groups
 
 
-def create_web(messages, handlers):
+def create_web(messages):
     app = Flask(__name__, template_folder='views')
 
     @app.get('/')

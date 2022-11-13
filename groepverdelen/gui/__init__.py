@@ -8,7 +8,7 @@ from gui.add_student import create_add_student
 
 
 # If you're thinking 'what weird Python is this??', it's demo-code and I'm not allowed to use classes yet:)
-def create_gui(messages, command_handlers, process_message, model):
+def create_gui(messages, process_message, model):
     root = tkinter.Tk()
     root.geometry('1024x768')
     columns = 3

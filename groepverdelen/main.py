@@ -9,7 +9,6 @@ from gui import create_gui
 from web import create_web
 
 messages = []
-handlers = {}
 
 model = initial_groups()
 
@@ -31,8 +30,8 @@ def process_message(message, arguments):
         gui['refresh_charts']()
 
 
-gui = create_gui(messages, handlers, process_message, model)
-web = create_web(messages, handlers)
+gui = create_gui(messages, process_message, model)
+web = create_web(messages)
 
 if __name__ == '__main__':
     threading.Thread(target=web['start']).start()
